@@ -52,13 +52,10 @@ RUN \
     mongo-c-driver \
     hiredis \
     curl \
-    openldap-dev \
     libmemcached \
-    sqlite-libs \
-    libcrypto1.1
+    sqlite-libs && \
+    rm -f /var/cache/apk/*
 
 RUN ldd *.so || true
 
-# COPY run.sh .
-
-CMD [ "sh", "-c", "./run.sh /usr/sbin/mosquitto -c /mosquitto/config/mosquitto.conf" ]
+CMD ["/usr/sbin/mosquitto", "-c", "/mosquitto/config/mosquitto.conf"]
